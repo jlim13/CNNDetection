@@ -13,6 +13,7 @@ from scipy.ndimage.filters import gaussian_filter
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def dataset_folder(opt, root):
+    
     if opt.mode == 'binary':
         return binary_dataset(opt, root)
     if opt.mode == 'filename':
