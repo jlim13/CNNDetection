@@ -19,6 +19,16 @@ parser.add_argument('-m','--model_path', type=str, default='weights/blur_jpg_pro
 parser.add_argument('-b','--batch_size', type=int, default=32)
 parser.add_argument('-j','--workers', type=int, default=4, help='number of workers')
 parser.add_argument('-c','--crop', type=int, default=None, help='by default, do not crop. specify crop size')
+from IPython import embed
+
+from tqdm import tqdm
+
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-d','--dir', nargs='+', type=str, default='examples_realfakedir')
+parser.add_argument('-m','--model_path', type=str, default='weights/blur_jpg_prob0.5.pth')
+parser.add_argument('-b','--batch_size', type=int, default=32)
+parser.add_argument('-j','--workers', type=int, default=4, help='number of workers')
+parser.add_argument('--crop', type=int, default=None, help='by default, do not crop. specify crop size')
 parser.add_argument('--use_cpu', action='store_true', help='uses gpu by default, turn on to use cpu')
 parser.add_argument('--size_only', action='store_true', help='only look at sizes of images in dataset')
 
@@ -41,6 +51,7 @@ if(opt.crop is not None):
   print('Cropping to [%i]'%opt.crop)
 else:
   print('Not cropping')
+
 trans = transforms.Compose(trans_init + [
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
@@ -87,5 +98,4 @@ if(not opt.size_only):
   ap = average_precision_score(y_true, y_pred)
 
   print('AP: {:2.2f}, Acc: {:2.2f}, Acc (real): {:2.2f}, Acc (fake): {:2.2f}'.format(ap*100., acc*100., r_acc*100., f_acc*100.))
-
-
+  print('AP: {:2.2f}%, Acc: {:2.2f}%, Acc (real): {:2.2f}%, Acc (fake): {:2.2f}%'.format(ap*100, acc*100, r_acc*100, f_acc*100))

@@ -42,6 +42,13 @@ This command computes AP and accuracy on a dataset. See the [provided directory]
 python demo_dir.py -d examples/realfakedir -m weights/blur_jpg_prob0.5.pth
 ```
 
+```
+python demo_dir.py -d example_realfakedir -m weights/blur_jpg_prob0.5.pth
+```
+
+`demo_dir.py` runs the model on a directory
+
+
 ## (3) Dataset
 
 ### Testset
