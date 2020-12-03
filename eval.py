@@ -18,8 +18,8 @@ rows = [["{} model testing on...".format(model_name)],
 print("{} model testing on...".format(model_name))
 
 for v_id, val in enumerate(vals):
-    if not val =='cyclegan':
-        continue
+    #if not val =='cyclegan':
+    #    continue
 
     opt.dataroot = '{}/{}'.format(dataroot, val)
     # opt.dataroot = 'dataset/chest_xray/gan_exp'
@@ -30,7 +30,7 @@ for v_id, val in enumerate(vals):
 
     opt.no_resize = True    # testing without resizing by default
     print (opt.dataroot)
-    model = resnet50(num_classes=1)
+    model = resnet50(num_classes=1, testing = True)
     state_dict = torch.load(model_path, map_location='cpu')
     model.load_state_dict(state_dict['model'])
     model.cuda()
